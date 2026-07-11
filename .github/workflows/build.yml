@@ -30,7 +30,7 @@ jobs:
     timeout-minutes: 35
     steps:
       - name: Check out exact commit
-        uses: actions/checkout@7c062c3e10555365538e7887c3a4445853503f56 # v7.0.0
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Install pinned pnpm
         uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
@@ -88,7 +88,7 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: Check out exact commit
-        uses: actions/checkout@7c062c3e10555365538e7887c3a4445853503f56 # v7.0.0
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Install pinned pnpm
         uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
@@ -144,7 +144,7 @@ jobs:
         shell: bash
     steps:
       - name: Check out exact commit
-        uses: actions/checkout@7c062c3e10555365538e7887c3a4445853503f56 # v7.0.0
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Install pinned pnpm
         uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
