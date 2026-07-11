@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "scripts/generate-asset-manifest.ts",
+  "files": {
+    "icons/pax-localia.icns": {
+      "sizeBytes": 1778231,
+      "sha256": "c9adf0ce3f1df63c52b73b00faeb59534fba0b73e67f636e5cae816a5b547f51"
+    },
+    "icons/pax-localia.ico": {
+      "sizeBytes": 137097,
+      "sha256": "e5cb08af8c278dcb466376f061f0c9f6b9df89061761ebfaccdc9e3a18443c45"
+    },
+    "icons/pax-localia.png": {
+      "sizeBytes": 1131179,
+      "sha256": "6741bbc24e1158a5e6c2020c08cd6d935d657d72518d2abb27c5e6799ffbcca2"
+    },
+    "licenses/DATASETS.md": {
+      "sizeBytes": 880,
+      "sha256": "8a95fe07a842c84c905841805842ee0bfca42a96cd30966b6cc7ae4f64680039"
+    },
+    "licenses/THIRD_PARTY_NOTICES.txt": {
+      "sizeBytes": 831,
+      "sha256": "249aa7ba3a18aae959493c47680f8dd12345dca9b07163e3454e4e128e412281"
+    },
+    "maps/border-crisis-v1.geojson": {
+      "sizeBytes": 6066,
+      "sha256": "2fe282d8a025bea7f28be92a5045b196a4732420b001c35a201f966e1e714382"
+    },
+    "maps/july-crisis-v1.geojson": {
+      "sizeBytes": 3797,
+      "sha256": "4477c637bd8c82c19efadc9f7c9ab61e2740dd1840e70fb874dc7605323187ca"
+    },
+    "maps/orpheus-reach-v1.geojson": {
+      "sizeBytes": 5053,
+      "sha256": "f92f06a3d430a7f9b454b57945feb1bd3ce825a5c05a6616ee947121211531eb"
+    },
+    "scenarios/july-crisis-1914.json": {
+      "sizeBytes": 33268,
+      "sha256": "8e9d1a2939af5676aa5508ecedea24a93587da728c9421ad77060d5b3b45b3dc"
+    },
+    "scenarios/orpheus-reach.json": {
+      "sizeBytes": 27969,
+      "sha256": "c6a2225c4f7e779f1d0b14f86b363102fc0580eb178f999c87d450617f2fcc21"
+    },
+    "scenarios/selene-border-crisis.json": {
+      "sizeBytes": 27117,
+      "sha256": "a3a231f0dd9e216497c0039e42bf3c75345ca791db48f4cf06a207e337954db7"
+    }
+  }
+}

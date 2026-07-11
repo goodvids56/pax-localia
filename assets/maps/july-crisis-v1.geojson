@@ -1,0 +1,185 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "region:bosnia",
+      "properties": {
+        "regionId": "region:bosnia",
+        "name": "Bosnia and Herzegovina"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [20, 40],
+            [22.2, 40.28],
+            [22.2, 42.28],
+            [20, 42],
+            [20, 40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:croatia",
+      "properties": {
+        "regionId": "region:croatia",
+        "name": "Croatia-Slavonia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [22.2, 40],
+            [24.4, 39.72],
+            [24.4, 41.72],
+            [22.2, 42],
+            [22.2, 40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:austria",
+      "properties": {
+        "regionId": "region:austria",
+        "name": "Austrian Lands"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [24.4, 40],
+            [26.599999999999998, 40.28],
+            [26.599999999999998, 42.28],
+            [24.4, 42],
+            [24.4, 40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:serbia",
+      "properties": {
+        "regionId": "region:serbia",
+        "name": "Serbia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [20, 38],
+            [22.2, 37.72],
+            [22.2, 39.72],
+            [20, 40],
+            [20, 38]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:hungary",
+      "properties": {
+        "regionId": "region:hungary",
+        "name": "Hungarian Lands"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [22.2, 38],
+            [24.4, 38.28],
+            [24.4, 40.28],
+            [22.2, 40],
+            [22.2, 38]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:romania",
+      "properties": {
+        "regionId": "region:romania",
+        "name": "Romania"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [24.4, 38],
+            [26.599999999999998, 37.72],
+            [26.599999999999998, 39.72],
+            [24.4, 40],
+            [24.4, 38]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:montenegro",
+      "properties": {
+        "regionId": "region:montenegro",
+        "name": "Montenegro"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [20, 36],
+            [22.2, 36.28],
+            [22.2, 38.28],
+            [20, 38],
+            [20, 36]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:macedonia",
+      "properties": {
+        "regionId": "region:macedonia",
+        "name": "Vardar Macedonia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [22.2, 36],
+            [24.4, 35.72],
+            [24.4, 37.72],
+            [22.2, 38],
+            [22.2, 36]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:bulgaria",
+      "properties": {
+        "regionId": "region:bulgaria",
+        "name": "Bulgaria"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [24.4, 36],
+            [26.599999999999998, 36.28],
+            [26.599999999999998, 38.28],
+            [24.4, 38],
+            [24.4, 36]
+          ]
+        ]
+      }
+    }
+  ]
+}

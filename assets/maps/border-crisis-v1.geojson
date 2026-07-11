@@ -1,0 +1,305 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "region:northwatch",
+      "properties": {
+        "regionId": "region:northwatch",
+        "name": "Northwatch"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-10, 46],
+            [-6, 46.42],
+            [-6, 49.42],
+            [-10, 49],
+            [-10, 46]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:pine-march",
+      "properties": {
+        "regionId": "region:pine-march",
+        "name": "Pine March"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-6, 46],
+            [-2, 45.58],
+            [-2, 48.58],
+            [-6, 49],
+            [-6, 46]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:high-vale",
+      "properties": {
+        "regionId": "region:high-vale",
+        "name": "High Vale"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-2, 46],
+            [2, 46.42],
+            [2, 49.42],
+            [-2, 49],
+            [-2, 46]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:brine-coast",
+      "properties": {
+        "regionId": "region:brine-coast",
+        "name": "Brine Coast"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [2, 46],
+            [6, 45.58],
+            [6, 48.58],
+            [2, 49],
+            [2, 46]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:east-harbor",
+      "properties": {
+        "regionId": "region:east-harbor",
+        "name": "East Harbor"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [6, 46],
+            [10, 46.42],
+            [10, 49.42],
+            [6, 49],
+            [6, 46]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:westmere",
+      "properties": {
+        "regionId": "region:westmere",
+        "name": "Westmere"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-10, 43],
+            [-6, 42.58],
+            [-6, 45.58],
+            [-10, 46],
+            [-10, 43]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:amber-fields",
+      "properties": {
+        "regionId": "region:amber-fields",
+        "name": "Amber Fields"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-6, 43],
+            [-2, 43.42],
+            [-2, 46.42],
+            [-6, 46],
+            [-6, 43]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:selene-crossing",
+      "properties": {
+        "regionId": "region:selene-crossing",
+        "name": "Selene Crossing"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-2, 43],
+            [2, 42.58],
+            [2, 45.58],
+            [-2, 46],
+            [-2, 43]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:veyra-gate",
+      "properties": {
+        "regionId": "region:veyra-gate",
+        "name": "Veyra Gate"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [2, 43],
+            [6, 43.42],
+            [6, 46.42],
+            [2, 46],
+            [2, 43]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:red-cliffs",
+      "properties": {
+        "regionId": "region:red-cliffs",
+        "name": "Red Cliffs"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [6, 43],
+            [10, 42.58],
+            [10, 45.58],
+            [6, 46],
+            [6, 43]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:aster-bay",
+      "properties": {
+        "regionId": "region:aster-bay",
+        "name": "Aster Bay"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-10, 40],
+            [-6, 40.42],
+            [-6, 43.42],
+            [-10, 43],
+            [-10, 40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:greenfold",
+      "properties": {
+        "regionId": "region:greenfold",
+        "name": "Greenfold"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-6, 40],
+            [-2, 39.58],
+            [-2, 42.58],
+            [-6, 43],
+            [-6, 40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:south-road",
+      "properties": {
+        "regionId": "region:south-road",
+        "name": "South Road"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-2, 40],
+            [2, 40.42],
+            [2, 43.42],
+            [-2, 43],
+            [-2, 40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:glass-steppe",
+      "properties": {
+        "regionId": "region:glass-steppe",
+        "name": "Glass Steppe"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [2, 40],
+            [6, 39.58],
+            [6, 42.58],
+            [2, 43],
+            [2, 40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:dawn-coast",
+      "properties": {
+        "regionId": "region:dawn-coast",
+        "name": "Dawn Coast"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [6, 40],
+            [10, 40.42],
+            [10, 43.42],
+            [6, 43],
+            [6, 40]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "useDefineForClassFields": true,
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["node"],
+    "paths": {
+      "@pax-localia/domain": ["./packages/domain/src/index.ts"],
+      "@pax-localia/simulation": ["./packages/simulation/src/index.ts"],
+      "@pax-localia/ai": ["./packages/ai/src/index.ts"],
+      "@pax-localia/database": ["./packages/database/src/index.ts"],
+      "@pax-localia/map-data": ["./packages/map-data/src/index.ts"],
+      "@pax-localia/scenario-sdk": ["./packages/scenario-sdk/src/index.ts"]
+    }
+  },
+  "include": [
+    "apps/**/*.ts",
+    "apps/**/*.tsx",
+    "packages/**/*.ts",
+    "scripts/**/*.ts",
+    "tests/**/*.ts",
+    "*.ts"
+  ],
+  "exclude": ["node_modules", "out", "dist", "coverage"]
+}

@@ -1,0 +1,245 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "region:helion-prime",
+      "properties": {
+        "regionId": "region:helion-prime",
+        "name": "Helion Prime"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [105, -4],
+            [110, -3.44],
+            [110, 0.56],
+            [105, 0],
+            [105, -4]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:flare-belt",
+      "properties": {
+        "regionId": "region:flare-belt",
+        "name": "Flare Belt"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [110, -4],
+            [115, -4.5600000000000005],
+            [115, -0.56],
+            [110, 0],
+            [110, -4]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:veil-port",
+      "properties": {
+        "regionId": "region:veil-port",
+        "name": "Veil Port"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [115, -4],
+            [120, -3.44],
+            [120, 0.56],
+            [115, 0],
+            [115, -4]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:echo-drift",
+      "properties": {
+        "regionId": "region:echo-drift",
+        "name": "Echo Drift"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [120, -4],
+            [125, -4.5600000000000005],
+            [125, -0.56],
+            [120, 0],
+            [120, -4]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:chorus-one",
+      "properties": {
+        "regionId": "region:chorus-one",
+        "name": "Chorus One"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [105, -8],
+            [110, -8.56],
+            [110, -4.5600000000000005],
+            [105, -4],
+            [105, -8]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:spore-sea",
+      "properties": {
+        "regionId": "region:spore-sea",
+        "name": "Spore Sea"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [110, -8],
+            [115, -7.4399999999999995],
+            [115, -3.44],
+            [110, -4],
+            [110, -8]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:relay-nine",
+      "properties": {
+        "regionId": "region:relay-nine",
+        "name": "Relay Nine"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [115, -8],
+            [120, -8.56],
+            [120, -4.5600000000000005],
+            [115, -4],
+            [115, -8]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:ashen-ring",
+      "properties": {
+        "regionId": "region:ashen-ring",
+        "name": "Ashen Ring"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [120, -8],
+            [125, -7.4399999999999995],
+            [125, -3.44],
+            [120, -4],
+            [120, -8]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:pilgrim-span",
+      "properties": {
+        "regionId": "region:pilgrim-span",
+        "name": "Pilgrim Span"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [105, -12],
+            [110, -11.44],
+            [110, -7.4399999999999995],
+            [105, -8],
+            [105, -12]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:quiet-moon",
+      "properties": {
+        "regionId": "region:quiet-moon",
+        "name": "Quiet Moon"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [110, -12],
+            [115, -12.56],
+            [115, -8.56],
+            [110, -8],
+            [110, -12]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:foundry-arc",
+      "properties": {
+        "regionId": "region:foundry-arc",
+        "name": "Foundry Arc"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [115, -12],
+            [120, -11.44],
+            [120, -7.4399999999999995],
+            [115, -8],
+            [115, -12]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:outer-dark",
+      "properties": {
+        "regionId": "region:outer-dark",
+        "name": "Outer Dark"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [120, -12],
+            [125, -12.56],
+            [125, -8.56],
+            [120, -8],
+            [120, -12]
+          ]
+        ]
+      }
+    }
+  ]
+}

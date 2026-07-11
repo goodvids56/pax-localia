@@ -1,0 +1,32 @@
+PAX LOCALIA THIRD-PARTY NOTICES
+
+Pax Localia application source is licensed GPL-3.0-or-later. See LICENSE.
+
+Runtime:
+- Electron (MIT)
+- React and React DOM (MIT)
+- Zustand (MIT)
+- Zod (MIT)
+- better-sqlite3 (MIT)
+- MapLibre GL JS (BSD-3-Clause)
+- Pino (MIT)
+- date-fns (MIT)
+- fflate (MIT)
+
+Build and verification:
+- Electron Forge, makers, and plugins (MIT)
+- Vite and @vitejs/plugin-react (MIT)
+- TypeScript (Apache-2.0)
+- ESLint and TypeScript ESLint (MIT)
+- Prettier (MIT)
+- Vitest (MIT)
+- Playwright (Apache-2.0)
+- pnpm (MIT)
+- png2icons (MIT)
+- lodash (MIT)
+- macos-alias (MIT)
+- fs-xattr (MIT)
+
+Dataset and scenario notices are in DATASETS.md. Dependency package license
+files are retained in the source dependency tree and packaged application
+archive as applicable. Exact dependency versions are pinned in pnpm-lock.yaml.

@@ -1,0 +1,52 @@
+{
+  "models": [
+    {
+      "key": "publisher/atlas-8b-q4",
+      "display_name": "Atlas 8B Instruct",
+      "publisher": "Example Publisher",
+      "architecture": "atlas",
+      "format": "GGUF",
+      "quantization": "Q4_K_M",
+      "parameter_size": "8B",
+      "size_bytes": 5120000000,
+      "type": "llm",
+      "state": "loaded",
+      "max_context_length": 131072,
+      "capabilities": ["chat", "reasoning"],
+      "loaded_instances": [
+        {
+          "id": "instance-atlas",
+          "context_length": 8192,
+          "config": {
+            "context_length": 8192,
+            "flash_attention": true,
+            "eval_batch_size": 512
+          }
+        }
+      ]
+    },
+    {
+      "key": "publisher/cascade-12b-mlx",
+      "display_name": "Cascade 12B MLX",
+      "publisher": "Example Publisher",
+      "arch": "cascade",
+      "compatibility_type": "MLX",
+      "parameter_size": "12B",
+      "size_bytes": 7200000000,
+      "type": "llm",
+      "state": "unloaded",
+      "max_context_length": 32768,
+      "trained_for_tool_use": true,
+      "loaded_instances": []
+    },
+    {
+      "key": "publisher/embed-small",
+      "display_name": "Embed Small",
+      "publisher": "Example Publisher",
+      "format": "GGUF",
+      "type": "embedding",
+      "state": "loaded",
+      "loaded_instances": [{ "id": "embed-instance", "context_length": 2048 }]
+    }
+  ]
+}
