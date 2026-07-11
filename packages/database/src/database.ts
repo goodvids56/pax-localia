@@ -232,7 +232,7 @@ export class PaxDatabase {
     const existing = this.database
       .prepare('SELECT source FROM scenarios WHERE id = ?')
       .get(scenario.id) as { source: string } | undefined;
-    if (existing?.source === 'bundled' && source !== 'bundled') {
+    if (existing?.source === 'bundled') {
       throw new Error('Bundled scenarios are immutable; duplicate the scenario before editing.');
     }
     const timestamp = now();

@@ -86,7 +86,11 @@ describe('runtime network policy', () => {
   it('contains no renderer runtime CDN, remote font, tile, analytics, or public API URL', () => {
     const rendererRoot = path.join(process.cwd(), 'apps/desktop/src/renderer');
     const rendererSource = filesUnder(rendererRoot)
-      .filter((filename) => /\.(?:ts|tsx|css|html)$/.test(filename))
+      .filter(
+        (filename) =>
+          !filename.includes(`${path.sep}.vite${path.sep}`) &&
+          /\.(?:ts|tsx|css|html)$/.test(filename),
+      )
       .map((filename) => readFileSync(filename, 'utf8'))
       .join('\n');
     expect(rendererSource).not.toMatch(/https?:\/\/(?!127\.0\.0\.1|localhost)/);
