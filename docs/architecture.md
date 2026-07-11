@@ -119,11 +119,13 @@ Release fuses disable Run-as-Node, Node option environment variables, CLI
 inspection, and non-ASAR loading while enabling cookie encryption and embedded
 ASAR integrity.
 
-Playwright cannot attach to that fuse-hardened binary because it uses the Node
-inspector. E2E therefore runs the same production Vite bundles through the
-development Electron executable. A separate marker-based smoke command launches
-the actual packaged binary and confirms both SQLite initialization and renderer
-load without enabling inspector access.
+Playwright cannot attach to the normal fuse-hardened binary because it uses the
+Node inspector. `test:e2e` therefore creates a dedicated local automation
+package with only the CLI-inspector fuse enabled, runs the production bundle,
+and discards it. Normal `package`/`make` and CI artifact builds do not set that
+flag and retain inspector-disabled fuses. A separate marker-based smoke command
+launches the normal packaged binary and confirms both SQLite initialization and
+renderer load without inspector access.
 
 ## Performance shape
 

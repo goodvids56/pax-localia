@@ -5,6 +5,25 @@ import { _electron as electron, expect, test, type ElectronApplication } from '@
 
 const temporaryDirectories: string[] = [];
 
+function packagedElectronExecutable(): string {
+  const root = process.cwd();
+  if (process.platform === 'win32') {
+    return path.join(root, 'out', 'Pax Localia-win32-x64', 'pax-localia.exe');
+  }
+  if (process.platform === 'darwin') {
+    return path.join(
+      root,
+      'out',
+      `Pax Localia-darwin-${process.arch}`,
+      'Pax Localia.app',
+      'Contents',
+      'MacOS',
+      'Pax Localia',
+    );
+  }
+  return path.join(root, 'out', 'Pax Localia-linux-x64', 'pax-localia');
+}
+
 function developmentElectronExecutable(): string {
   const pnpmStore = path.join(process.cwd(), 'node_modules', '.pnpm');
   const pnpmDistributions = existsSync(pnpmStore)
@@ -32,8 +51,14 @@ function developmentElectronExecutable(): string {
 async function launch(dataDirectory: string): Promise<ElectronApplication> {
   mkdirSync(dataDirectory, { recursive: true });
   return electron.launch({
-    executablePath: developmentElectronExecutable(),
-    args: [process.cwd(), ...(process.platform === 'linux' ? ['--no-sandbox'] : [])],
+    executablePath:
+      process.env.PAX_LOCALIA_E2E_USE_PACKAGED === '1'
+        ? packagedElectronExecutable()
+        : developmentElectronExecutable(),
+    args: [
+      ...(process.env.PAX_LOCALIA_E2E_USE_PACKAGED === '1' ? [] : [process.cwd()]),
+      ...(process.platform === 'linux' ? ['--no-sandbox'] : []),
+    ],
     env: {
       ...process.env,
       PAX_LOCALIA_E2E_DATA_DIR: dataDirectory,
