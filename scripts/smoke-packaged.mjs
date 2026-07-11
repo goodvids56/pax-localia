@@ -17,7 +17,7 @@ function executablePath() {
       'Pax Localia.app',
       'Contents',
       'MacOS',
-      'Pax Localia',
+      'pax-localia',
     );
   }
   return path.join(root, 'out', 'Pax Localia-linux-x64', 'pax-localia');
@@ -47,9 +47,12 @@ child.stderr.on('data', (chunk) => {
 });
 let exited = false;
 let exitCode = null;
-child.once('exit', (code) => {
-  exited = true;
-  exitCode = code;
+const exitPromise = new Promise((resolve) => {
+  child.once('exit', (code) => {
+    exited = true;
+    exitCode = code;
+    resolve();
+  });
 });
 
 try {
@@ -72,6 +75,17 @@ try {
     throw new Error(`Packaged app did not become ready within 20 seconds.\n${output}`);
   }
 } finally {
-  if (!exited) child.kill();
-  rmSync(temporaryDirectory, { recursive: true, force: true });
+  if (!exited) {
+    child.kill();
+    await Promise.race([exitPromise, new Promise((resolve) => setTimeout(resolve, 3_000))]);
+  }
+  try {
+    rmSync(temporaryDirectory, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });
+  } catch (error) {
+    console.warn(
+      `Readiness passed; deferred cleanup of temporary directory: ${
+        error instanceof Error ? error.message : 'unknown cleanup error'
+      }`,
+    );
+  }
 }
