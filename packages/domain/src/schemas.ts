@@ -52,7 +52,6 @@ const ColorSchema = z.string().regex(/^#[0-9a-f]{6}$/i, 'Expected a six-digit he
 const ScoreSchema = z.number().int().min(-100).max(100);
 const PercentSchema = z.number().int().min(0).max(100);
 const CoordinateSchema = z.tuple([z.number().min(-180).max(180), z.number().min(-90).max(90)]);
-const ShortTextSchema = z.string().trim().min(1).max(300);
 const JsonValueSchema = z.json();
 
 export const ActorKindSchema = z.enum([

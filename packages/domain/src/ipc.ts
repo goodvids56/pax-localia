@@ -6,6 +6,7 @@ import {
   AppSettingsSchema,
   BranchIdSchema,
   BranchSummarySchema,
+  CommitmentIdSchema,
   ConversationIdSchema,
   ConversationSchema,
   CreateGameInputSchema,
@@ -13,22 +14,20 @@ import {
   EventSchema,
   GameIdSchema,
   GameSummarySchema,
-  MessageSchema,
   ProviderSettingsSchema,
   RewindInputSchema,
   ScenarioEditorInputSchema,
   ScenarioIdSchema,
   ScenarioSchema,
-  ScenarioSummarySchema,
   SendMessageInputSchema,
   TimelineJumpInputSchema,
-  TimelineJumpResultSchema,
   WorldStateSchema,
 } from './schemas';
 import type {
   AppSettings,
   BranchId,
   BranchSummary,
+  Commitment,
   Conversation,
   ConversationId,
   CreateGameInput,
@@ -84,10 +83,12 @@ export const IpcChannels = {
   chatsList: 'chats:list',
   chatsSend: 'chats:send',
   chatsArchive: 'chats:archive',
+  chatsRespondCommitment: 'chats:respond-commitment',
   advisorAsk: 'advisor:ask',
   timelineJump: 'timeline:jump',
   timelineCancel: 'timeline:cancel',
   timelineBranches: 'timeline:branches',
+  timelineSwitchBranch: 'timeline:switch-branch',
   timelineRewind: 'timeline:rewind',
   timelineCompare: 'timeline:compare',
   timelineProgress: 'timeline:progress',
@@ -337,11 +338,21 @@ export const IpcRequestSchemas = {
     conversationId: ConversationIdSchema,
     archived: z.boolean(),
   }),
+  [IpcChannels.chatsRespondCommitment]: z.object({
+    gameId: GameIdSchema,
+    branchId: BranchIdSchema,
+    commitmentId: CommitmentIdSchema,
+    response: z.enum(['accepted', 'rejected', 'pending']),
+  }),
   [IpcChannels.advisorAsk]: SendMessageInputSchema,
   [IpcChannels.timelineJump]: TimelineJumpInputSchema,
   [IpcChannels.timelineCancel]: GameIdSchema,
   [IpcChannels.timelineBranches]: GameIdSchema,
   [IpcChannels.timelineRewind]: RewindInputSchema,
+  [IpcChannels.timelineSwitchBranch]: z.object({
+    gameId: GameIdSchema,
+    branchId: BranchIdSchema,
+  }),
   [IpcChannels.timelineCompare]: z.object({
     gameId: GameIdSchema,
     leftBranchId: BranchIdSchema,
@@ -407,6 +418,12 @@ export interface PaxLocaliaApi {
     list(gameId: GameId, branchId: BranchId): Promise<Conversation[]>;
     send(input: SendMessageInput): Promise<Conversation>;
     archive(conversationId: ConversationId, archived: boolean): Promise<Conversation>;
+    respondCommitment(
+      gameId: GameId,
+      branchId: BranchId,
+      commitmentId: Commitment['id'],
+      response: 'accepted' | 'rejected' | 'pending',
+    ): Promise<Commitment>;
   };
   advisor: {
     ask(input: SendMessageInput): Promise<Conversation>;
@@ -415,6 +432,7 @@ export interface PaxLocaliaApi {
     jump(input: TimelineJumpInput): Promise<TimelineJumpResult>;
     cancel(gameId: GameId): Promise<OperationResult>;
     branches(gameId: GameId): Promise<BranchSummary[]>;
+    switchBranch(gameId: GameId, branchId: BranchId): Promise<GameView>;
     rewind(input: RewindInput): Promise<GameView>;
     compare(
       gameId: GameId,

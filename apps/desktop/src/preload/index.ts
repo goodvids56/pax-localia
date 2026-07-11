@@ -49,6 +49,13 @@ const api: PaxLocaliaApi = {
     send: (input) => ipcRenderer.invoke(IpcChannels.chatsSend, input),
     archive: (conversationId, archived) =>
       ipcRenderer.invoke(IpcChannels.chatsArchive, { conversationId, archived }),
+    respondCommitment: (gameId, branchId, commitmentId, response) =>
+      ipcRenderer.invoke(IpcChannels.chatsRespondCommitment, {
+        gameId,
+        branchId,
+        commitmentId,
+        response,
+      }),
   },
   advisor: {
     ask: (input) => ipcRenderer.invoke(IpcChannels.advisorAsk, input),
@@ -57,6 +64,8 @@ const api: PaxLocaliaApi = {
     jump: (input) => ipcRenderer.invoke(IpcChannels.timelineJump, input),
     cancel: (gameId) => ipcRenderer.invoke(IpcChannels.timelineCancel, gameId),
     branches: (gameId) => ipcRenderer.invoke(IpcChannels.timelineBranches, gameId),
+    switchBranch: (gameId, branchId) =>
+      ipcRenderer.invoke(IpcChannels.timelineSwitchBranch, { gameId, branchId }),
     rewind: (input) => ipcRenderer.invoke(IpcChannels.timelineRewind, input),
     compare: (gameId, leftBranchId, rightBranchId) =>
       ipcRenderer.invoke(IpcChannels.timelineCompare, {

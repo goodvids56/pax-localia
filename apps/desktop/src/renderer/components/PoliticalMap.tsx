@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import maplibregl, {
   type GeoJSONSource,
   type LngLatBoundsLike,
@@ -31,6 +31,18 @@ const colorblindPalette = [
   '#aa3377',
   '#bbbbbb',
 ];
+
+function supportsWebGl(): boolean {
+  try {
+    const canvas = document.createElement('canvas');
+    return Boolean(
+      canvas.getContext('webgl2', { failIfMajorPerformanceCaveat: false }) ??
+      canvas.getContext('webgl', { failIfMajorPerformanceCaveat: false }),
+    );
+  } catch {
+    return false;
+  }
+}
 
 function collectionFor(
   datasetId: string,
@@ -66,7 +78,7 @@ function collectionFor(
         },
       };
     }),
-  } as FeatureCollection;
+  };
 }
 
 function boundsFor(collection: FeatureCollection): LngLatBoundsLike {
@@ -102,19 +114,26 @@ export function PoliticalMap({
   const [showCities, setShowCities] = useState(true);
   const [showUnits, setShowUnits] = useState(true);
   const [showLabels, setShowLabels] = useState(true);
+  const [mapUnavailable, setMapUnavailable] = useState(false);
   const collection = useMemo(
     () => collectionFor(datasetId, world, layerMode, selectedRegionId, colorblindMode),
     [datasetId, world, layerMode, selectedRegionId, colorblindMode],
   );
   const collectionRef = useRef(collection);
-  worldRef.current = world;
-  selectRegionRef.current = onSelectRegion;
-  selectActorRef.current = onSelectActor;
-  reducedMotionRef.current = reducedMotion;
-  collectionRef.current = collection;
+  useEffect(() => {
+    worldRef.current = world;
+    selectRegionRef.current = onSelectRegion;
+    selectActorRef.current = onSelectActor;
+    reducedMotionRef.current = reducedMotion;
+    collectionRef.current = collection;
+  }, [collection, onSelectActor, onSelectRegion, reducedMotion, world]);
 
   useEffect(() => {
     if (!container.current || map.current) return;
+    if (!supportsWebGl()) {
+      queueMicrotask(() => setMapUnavailable(true));
+      return;
+    }
     const instance = new maplibregl.Map({
       container: container.current,
       style: {
@@ -136,6 +155,13 @@ export function PoliticalMap({
       fadeDuration: reducedMotionRef.current ? 0 : 200,
     });
     map.current = instance;
+    instance.on('error', (event: unknown) => {
+      const error = (event as { error?: unknown }).error;
+      const errorMessage = error instanceof Error ? error.message : '';
+      if (errorMessage.toLocaleLowerCase().includes('webgl')) {
+        setMapUnavailable(true);
+      }
+    });
     instance.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
     instance.addControl(
       new maplibregl.AttributionControl({
@@ -212,7 +238,7 @@ export function PoliticalMap({
   }, []);
 
   useEffect(() => {
-    const source = map.current?.getSource('regions') as GeoJSONSource | undefined;
+    const source = map.current?.getSource<GeoJSONSource>('regions');
     source?.setData(collection);
   }, [collection]);
 
@@ -292,9 +318,87 @@ export function PoliticalMap({
     });
   };
 
+  const fallbackBounds = useMemo(() => {
+    const coordinates = collection.features.flatMap((feature) =>
+      feature.geometry.type === 'Polygon' ? feature.geometry.coordinates.flat() : [],
+    );
+    const longitudes = coordinates.map((coordinate) => coordinate[0] ?? 0);
+    const latitudes = coordinates.map((coordinate) => coordinate[1] ?? 0);
+    return {
+      minimumLongitude: Math.min(...longitudes),
+      maximumLongitude: Math.max(...longitudes),
+      minimumLatitude: Math.min(...latitudes),
+      maximumLatitude: Math.max(...latitudes),
+    };
+  }, [collection]);
+
+  const fallbackPoint = useCallback(
+    (coordinate: readonly number[]): [number, number] => {
+      const longitudeRange = fallbackBounds.maximumLongitude - fallbackBounds.minimumLongitude || 1;
+      const latitudeRange = fallbackBounds.maximumLatitude - fallbackBounds.minimumLatitude || 1;
+      return [
+        40 + (((coordinate[0] ?? 0) - fallbackBounds.minimumLongitude) / longitudeRange) * 920,
+        40 + ((fallbackBounds.maximumLatitude - (coordinate[1] ?? 0)) / latitudeRange) * 520,
+      ];
+    },
+    [fallbackBounds],
+  );
+
   return (
     <section className="map-shell" aria-label="Interactive political map">
-      <div ref={container} className="map-canvas" />
+      {mapUnavailable ? (
+        <div className="map-fallback" role="group" aria-label="Accessible political map fallback">
+          <svg viewBox="0 0 1000 600" role="img" aria-label="Political region map">
+            {collection.features.map((feature) => {
+              if (feature.geometry.type !== 'Polygon') return null;
+              const points = feature.geometry.coordinates[0]
+                ?.map((coordinate) => fallbackPoint(coordinate).join(','))
+                .join(' ');
+              const regionId = feature.properties?.regionId as RegionId | undefined;
+              if (!regionId) return null;
+              return (
+                <polygon
+                  key={regionId}
+                  points={points}
+                  fill={String(feature.properties?.color ?? '#5f6670')}
+                  className={[
+                    feature.properties?.contested ? 'contested' : '',
+                    feature.properties?.selected ? 'selected' : '',
+                  ].join(' ')}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Inspect ${feature.properties?.name ?? regionId}`}
+                  onClick={() => onSelectRegion(regionId)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      onSelectRegion(regionId);
+                    }
+                  }}
+                />
+              );
+            })}
+          </svg>
+          {showLabels &&
+            Object.values(world.regions).map((region) => {
+              const point = fallbackPoint(region.labelPosition);
+              return (
+                <button
+                  type="button"
+                  className="map-label fallback-map-label"
+                  style={{ left: `${point[0] / 10}%`, top: `${point[1] / 6}%` }}
+                  key={region.id}
+                  onClick={() => onSelectRegion(region.id)}
+                >
+                  {region.name}
+                </button>
+              );
+            })}
+          <p className="map-fallback-notice">WebGL is unavailable; using the accessible SVG map.</p>
+        </div>
+      ) : (
+        <div ref={container} className="map-canvas" />
+      )}
       <div className="map-tools panel">
         <fieldset>
           <legend>Map layers</legend>

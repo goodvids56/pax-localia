@@ -43,7 +43,7 @@ export function jsonSchemaFor<T>(schema: ZodType<T>): Record<string, unknown> {
   return z.toJSONSchema(schema, {
     target: 'draft-07',
     unrepresentable: 'throw',
-  }) as Record<string, unknown>;
+  });
 }
 
 export function contentFromOpenAIResponse(payload: unknown): string {

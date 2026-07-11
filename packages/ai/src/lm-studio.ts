@@ -95,14 +95,14 @@ export class LMStudioProvider extends OpenAICompatibleProvider {
     });
   }
 
-  override async capabilities(): Promise<ProviderCapabilities> {
-    return {
+  override capabilities(): Promise<ProviderCapabilities> {
+    return Promise.resolve({
       nativeModelApi: this.nativeApiAvailable === true,
       structuredOutput: true,
       streaming: true,
       modelLifecycle: this.nativeApiAvailable === true,
       tokenCounting: this.nativeApiAvailable === true,
-    };
+    });
   }
 
   private async listNative(signal?: AbortSignal): Promise<LocalModelInfo[] | undefined> {

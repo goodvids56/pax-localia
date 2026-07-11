@@ -22,7 +22,7 @@ interface RecentError {
 export interface AIManagerOptions {
   tokenFor(provider: 'lm-studio' | 'openai-compatible'): string | undefined;
   fetch?: FetchTransport;
-  readProbeCache?: (key: string) => unknown | undefined;
+  readProbeCache?: (key: string) => unknown;
   writeProbeCache?: (
     key: string,
     provider: string,
@@ -169,7 +169,7 @@ export class AIManager {
 
   async diagnostics(settings: ProviderSettings): Promise<SanitizedDiagnostics> {
     const provider = this.createProvider(settings);
-    let serverStatus = 'Not tested';
+    let serverStatus: string;
     let models: LocalModelInfo[] = [];
     let nativeApi = false;
     try {

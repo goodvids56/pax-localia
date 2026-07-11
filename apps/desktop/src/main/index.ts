@@ -1,4 +1,4 @@
-import { mkdirSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { app, BrowserWindow, Menu } from 'electron';
 import type { Logger } from 'pino';
@@ -13,6 +13,10 @@ declare const MAIN_WINDOW_VITE_NAME: string;
 let mainWindow: BrowserWindow | undefined;
 let service: AppService | undefined;
 let logger: Logger | undefined;
+
+if (process.env.PAX_LOCALIA_E2E_DATA_DIR) {
+  app.setPath('userData', process.env.PAX_LOCALIA_E2E_DATA_DIR);
+}
 
 if (!app.requestSingleInstanceLock()) {
   app.quit();
@@ -55,6 +59,18 @@ function createMainWindow(): BrowserWindow {
   );
   service?.setProgressTarget(window);
   window.once('ready-to-show', () => window.show());
+  window.webContents.once('did-finish-load', () => {
+    if (process.env.PAX_LOCALIA_SMOKE_FILE) {
+      writeFileSync(
+        process.env.PAX_LOCALIA_SMOKE_FILE,
+        JSON.stringify({
+          application: 'Pax Localia',
+          rendererLoaded: true,
+          databaseInitialized: Boolean(service),
+        }),
+      );
+    }
+  });
   window.webContents.on('render-process-gone', (_event, details) => {
     serviceLogger().error(
       { reason: details.reason, exitCode: details.exitCode },

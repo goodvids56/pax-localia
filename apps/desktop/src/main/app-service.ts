@@ -33,8 +33,6 @@ import {
   type Conversation,
   type ConversationId,
   type CreateGameInput,
-  type DraftActionInput,
-  type GameAction,
   type GameId,
   type GameView,
   type LocalModelInfo,
@@ -595,6 +593,7 @@ export class AppService {
     const settings = this.settings();
     let replyText: string;
     let tone = advisor ? 'analytical' : 'measured';
+    let commitmentsFromPlayer = false;
     let proposedCommitments: Omit<
       Commitment,
       'id' | 'conversationId' | 'fromActorId' | 'toActorIds' | 'createdDate' | 'status'
@@ -624,6 +623,7 @@ export class AppService {
               ? 'offer'
               : undefined;
       if (kind) {
+        commitmentsFromPlayer = true;
         proposedCommitments = [
           {
             kind,
@@ -740,8 +740,10 @@ export class AppService {
       const commitment = CommitmentSchema.parse({
         id: commitmentIds[index],
         conversationId,
-        fromActorId: advisor ? world.playerActorId : (speakerActorId ?? world.playerActorId),
-        toActorIds: advisor ? [world.playerActorId] : [world.playerActorId],
+        fromActorId: commitmentsFromPlayer
+          ? world.playerActorId
+          : (speakerActorId ?? world.playerActorId),
+        toActorIds: commitmentsFromPlayer ? participants : [world.playerActorId],
         ...proposal,
         createdDate: world.date,
         status: 'pending',
@@ -762,24 +764,35 @@ export class AppService {
     return this.ai.providerStatuses(this.settings().provider);
   }
 
+  private authorizeProviderSettings(candidate: ProviderSettings): ProviderSettings {
+    const parsed = ProviderSettingsSchema.parse(candidate);
+    const globalSettings = this.settings();
+    if (parsed.allowLan && !globalSettings.privacy.allowLanProviders) {
+      throw new Error(
+        'LAN inference is blocked until the persistent global LAN-provider warning is accepted.',
+      );
+    }
+    return parsed;
+  }
+
   async listModels(settings: ProviderSettings): Promise<LocalModelInfo[]> {
-    return this.ai.listModels(settings);
+    return this.ai.listModels(this.authorizeProviderSettings(settings));
   }
 
   async testModel(settings: ProviderSettings): Promise<ModelProbeResult> {
-    return this.ai.probe(settings);
+    return this.ai.probe(this.authorizeProviderSettings(settings));
   }
 
   async diagnostics(settings: ProviderSettings): Promise<SanitizedDiagnostics> {
-    return this.ai.diagnostics(settings);
+    return this.ai.diagnostics(this.authorizeProviderSettings(settings));
   }
 
   async loadModel(settings: ProviderSettings, modelKey: string): Promise<LocalModelInfo[]> {
-    return this.ai.loadModel({ ...settings, model: modelKey });
+    return this.ai.loadModel(this.authorizeProviderSettings({ ...settings, model: modelKey }));
   }
 
   async unloadModel(settings: ProviderSettings, instanceId: string): Promise<LocalModelInfo[]> {
-    return this.ai.unloadModel(settings, instanceId);
+    return this.ai.unloadModel(this.authorizeProviderSettings(settings), instanceId);
   }
 
   async exportScenario(id: string): Promise<OperationResult> {

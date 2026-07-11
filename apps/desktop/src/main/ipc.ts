@@ -5,6 +5,7 @@ import {
   AppPathsSchema,
   AppSettingsSchema,
   BranchSummarySchema,
+  CommitmentSchema,
   ConversationSchema,
   GameSummarySchema,
   GameViewSchema,
@@ -60,7 +61,7 @@ function register<InputSchema extends z.ZodType, OutputSchema extends z.ZodType>
         },
         'IPC operation failed',
       );
-      throw new Error(message);
+      throw new Error(message, { cause: error });
     }
   });
 }
@@ -274,6 +275,14 @@ export function registerIpcHandlers(service: AppService, logger: Logger): void {
     logger,
     ({ conversationId, archived }) => service.archiveConversation(conversationId, archived),
   );
+  register(
+    IpcChannels.chatsRespondCommitment,
+    IpcRequestSchemas[IpcChannels.chatsRespondCommitment],
+    CommitmentSchema,
+    logger,
+    ({ gameId, branchId, commitmentId, response }) =>
+      service.database.respondToCommitment(gameId, branchId, commitmentId, response),
+  );
 
   register(
     IpcChannels.timelineJump,
@@ -295,6 +304,13 @@ export function registerIpcHandlers(service: AppService, logger: Logger): void {
     z.array(BranchSummarySchema),
     logger,
     (gameId) => service.database.listBranches(gameId),
+  );
+  register(
+    IpcChannels.timelineSwitchBranch,
+    IpcRequestSchemas[IpcChannels.timelineSwitchBranch],
+    GameViewSchema,
+    logger,
+    ({ gameId, branchId }) => service.database.switchBranch(gameId, branchId),
   );
   register(
     IpcChannels.timelineRewind,

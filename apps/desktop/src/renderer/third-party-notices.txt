@@ -24,15 +24,15 @@ Prettier — MIT License
 Vitest — MIT License
 Playwright — Apache License 2.0
 pnpm — MIT License
+png2icons — MIT License
 
 Datasets and scenario sources
 Bundled schematic atomic-region geometry — original Pax Localia contributor
 work dedicated under CC0-1.0.
 
-The Uneasy Peace of 421 BCE scenario uses broad factual context from
-Thucydides, History of the Peloponnesian War, Book V. Ancient text and cited
-public-domain translations are public domain. The scenario synthesis,
-selection, and wording are original and licensed CC-BY-SA-4.0.
+The July Crisis: Balkan Ultimatum scenario uses broad factual context and the
+public-domain Austro-Hungarian ultimatum to Serbia of 23 July 1914. The scenario
+synthesis, selection, and wording are original and licensed CC-BY-SA-4.0.
 
 The Selene Border Crisis and Signals Across Orpheus Reach settings, names,
 text, and scenario data are original and licensed CC-BY-SA-4.0.

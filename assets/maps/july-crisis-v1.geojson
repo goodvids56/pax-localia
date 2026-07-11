@@ -3,10 +3,10 @@
   "features": [
     {
       "type": "Feature",
-      "id": "region:attica",
+      "id": "region:bosnia",
       "properties": {
-        "regionId": "region:attica",
-        "name": "Attica"
+        "regionId": "region:bosnia",
+        "name": "Bosnia and Herzegovina"
       },
       "geometry": {
         "type": "Polygon",
@@ -23,10 +23,10 @@
     },
     {
       "type": "Feature",
-      "id": "region:boeotia",
+      "id": "region:croatia",
       "properties": {
-        "regionId": "region:boeotia",
-        "name": "Boeotia"
+        "regionId": "region:croatia",
+        "name": "Croatia-Slavonia"
       },
       "geometry": {
         "type": "Polygon",
@@ -43,10 +43,10 @@
     },
     {
       "type": "Feature",
-      "id": "region:euboea",
+      "id": "region:austria",
       "properties": {
-        "regionId": "region:euboea",
-        "name": "Euboea"
+        "regionId": "region:austria",
+        "name": "Austrian Lands"
       },
       "geometry": {
         "type": "Polygon",
@@ -63,10 +63,10 @@
     },
     {
       "type": "Feature",
-      "id": "region:argolid",
+      "id": "region:serbia",
       "properties": {
-        "regionId": "region:argolid",
-        "name": "Argolid"
+        "regionId": "region:serbia",
+        "name": "Serbia"
       },
       "geometry": {
         "type": "Polygon",
@@ -83,10 +83,10 @@
     },
     {
       "type": "Feature",
-      "id": "region:corinthia",
+      "id": "region:hungary",
       "properties": {
-        "regionId": "region:corinthia",
-        "name": "Corinthia"
+        "regionId": "region:hungary",
+        "name": "Hungarian Lands"
       },
       "geometry": {
         "type": "Polygon",
@@ -103,10 +103,10 @@
     },
     {
       "type": "Feature",
-      "id": "region:arcadia",
+      "id": "region:romania",
       "properties": {
-        "regionId": "region:arcadia",
-        "name": "Arcadia"
+        "regionId": "region:romania",
+        "name": "Romania"
       },
       "geometry": {
         "type": "Polygon",
@@ -123,10 +123,10 @@
     },
     {
       "type": "Feature",
-      "id": "region:laconia",
+      "id": "region:montenegro",
       "properties": {
-        "regionId": "region:laconia",
-        "name": "Laconia"
+        "regionId": "region:montenegro",
+        "name": "Montenegro"
       },
       "geometry": {
         "type": "Polygon",
@@ -143,10 +143,10 @@
     },
     {
       "type": "Feature",
-      "id": "region:messene",
+      "id": "region:macedonia",
       "properties": {
-        "regionId": "region:messene",
-        "name": "Messene"
+        "regionId": "region:macedonia",
+        "name": "Vardar Macedonia"
       },
       "geometry": {
         "type": "Polygon",
@@ -163,10 +163,10 @@
     },
     {
       "type": "Feature",
-      "id": "region:mantinea",
+      "id": "region:bulgaria",
       "properties": {
-        "regionId": "region:mantinea",
-        "name": "Mantinea"
+        "regionId": "region:bulgaria",
+        "name": "Bulgaria"
       },
       "geometry": {
         "type": "Polygon",

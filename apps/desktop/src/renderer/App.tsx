@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type {
   ActorId,
-  AppSettings,
   GameView,
-  Scenario,
   ScenarioId,
   ScenarioSummary,
   TimelineProgress,
@@ -83,7 +81,7 @@ export default function App() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [setError, setGames, setLoading, setScenarios, setScreen, setSettings]);
 
   useEffect(() => {
     if (!settings) return;
@@ -601,7 +599,16 @@ export default function App() {
               className="button secondary large"
               onClick={() => {
                 const first = scenarios[0];
-                if (first) void openScenario(first, 'editor');
+                if (first) {
+                  void window.paxLocalia.scenarios
+                    .duplicate(first.id)
+                    .then((copy) => {
+                      setSelectedScenario(copy);
+                      setScreen('editor');
+                      return refreshLibrary();
+                    })
+                    .catch((caught) => setError(message(caught)));
+                }
               }}
             >
               Scenario workshop

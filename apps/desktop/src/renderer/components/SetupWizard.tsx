@@ -42,7 +42,20 @@ export function SetupWizard({ settings, onSaved, onComplete, onDiagnostics }: Se
   };
 
   useEffect(() => {
-    void detect();
+    let active = true;
+    void window.paxLocalia.ai
+      .listProviders()
+      .then((providerStatuses) => {
+        if (active) setStatuses(providerStatuses);
+      })
+      .catch((caught: unknown) => {
+        if (active) {
+          setError(caught instanceof Error ? caught.message : 'Provider detection failed.');
+        }
+      });
+    return () => {
+      active = false;
+    };
   }, []);
 
   const chooseProvider = (type: AppSettings['provider']['type']): void => {

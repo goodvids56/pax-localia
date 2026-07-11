@@ -59,14 +59,14 @@ export class OllamaProvider implements LocalAIProvider {
     );
   }
 
-  async capabilities(): Promise<ProviderCapabilities> {
-    return {
+  capabilities(): Promise<ProviderCapabilities> {
+    return Promise.resolve({
       nativeModelApi: true,
       structuredOutput: true,
       streaming: true,
       modelLifecycle: false,
       tokenCounting: true,
-    };
+    });
   }
 
   async listModels(signal?: AbortSignal): Promise<LocalModelInfo[]> {

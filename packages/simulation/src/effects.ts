@@ -44,7 +44,7 @@ function requireActor(world: WorldState, id: ActorId, active = true): Actor {
 }
 
 function requireRegion(world: WorldState, id: string): Region {
-  const region = world.regions[id as keyof typeof world.regions];
+  const region = world.regions[id];
   if (!region) {
     throw new RuleRejection('REGION_NOT_FOUND', `Region ${id} does not exist.`);
   }

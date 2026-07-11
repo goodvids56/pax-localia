@@ -229,6 +229,12 @@ export class PaxDatabase {
 
   saveScenario(candidate: Scenario, source: 'user' | 'imported' = 'user'): Scenario {
     const scenario = ScenarioSchema.parse(candidate);
+    const existing = this.database
+      .prepare('SELECT source FROM scenarios WHERE id = ?')
+      .get(scenario.id) as { source: string } | undefined;
+    if (existing?.source === 'bundled' && source !== 'bundled') {
+      throw new Error('Bundled scenarios are immutable; duplicate the scenario before editing.');
+    }
     const timestamp = now();
     this.database.transaction(() => {
       this.database
@@ -765,6 +771,38 @@ export class PaxDatabase {
     return world;
   }
 
+  respondToCommitment(
+    gameId: GameId,
+    branchId: BranchId,
+    commitmentId: Commitment['id'],
+    response: 'accepted' | 'rejected' | 'pending',
+  ): Commitment {
+    const world = this.getWorld(gameId, branchId);
+    const commitment = world.commitments.find((entry) => entry.id === commitmentId);
+    if (!commitment) throw new Error('Commitment was not found on this branch.');
+    if (!['pending', 'accepted'].includes(commitment.status)) {
+      throw new Error(`A ${commitment.status} commitment cannot be changed.`);
+    }
+    commitment.status = response;
+    const timestamp = now();
+    this.database.transaction(() => {
+      this.database
+        .prepare(
+          `UPDATE commitments SET status = ?, json = ?
+           WHERE id = ? AND game_id = ? AND branch_id = ?`,
+        )
+        .run(response, JSON.stringify(commitment), commitmentId, gameId, branchId);
+      this.database
+        .prepare(
+          `UPDATE branches SET world_json = ?, updated_at = ?
+           WHERE id = ? AND game_id = ?`,
+        )
+        .run(JSON.stringify(world), timestamp, branchId, gameId);
+      this.database.prepare('UPDATE games SET updated_at = ? WHERE id = ?').run(timestamp, gameId);
+    })();
+    return CommitmentSchema.parse(commitment);
+  }
+
   listBranches(gameId: GameId): BranchSummary[] {
     const rows = this.database
       .prepare('SELECT * FROM branches WHERE game_id = ? ORDER BY created_at')
@@ -782,6 +820,17 @@ export class PaxDatabase {
       turnCount: row.current_turn,
       date: WorldStateSchema.parse(JSON.parse(row.world_json)).date,
     }));
+  }
+
+  switchBranch(gameId: GameId, branchId: BranchId): GameView {
+    const branch = this.database
+      .prepare('SELECT 1 AS found FROM branches WHERE game_id = ? AND id = ?')
+      .get(gameId, branchId) as { found: number } | undefined;
+    if (!branch) throw new Error('The selected branch does not belong to this game.');
+    this.database
+      .prepare('UPDATE games SET active_branch_id = ?, updated_at = ? WHERE id = ?')
+      .run(branchId, now(), gameId);
+    return this.loadGame(gameId);
   }
 
   rewind(input: RewindInput): GameView {
@@ -912,6 +961,22 @@ export class PaxDatabase {
             stat,
             left: actor.stats[stat],
             right: other.stats[stat],
+          });
+        }
+      }
+      for (const resource of new Set([
+        ...Object.keys(actor.resources),
+        ...Object.keys(other.resources),
+      ])) {
+        const leftValue = actor.resources[resource] ?? 0;
+        const rightValue = other.resources[resource] ?? 0;
+        if (leftValue !== rightValue) {
+          statChanges.push({
+            actorId: actor.id,
+            actorName: actor.name,
+            stat: `resource:${resource}`,
+            left: leftValue,
+            right: rightValue,
           });
         }
       }
@@ -1251,7 +1316,7 @@ export class PaxDatabase {
     this.database.pragma('wal_checkpoint(TRUNCATE)');
   }
 
-  getProbeCache(cacheKey: string): unknown | undefined {
+  getProbeCache(cacheKey: string): unknown {
     const row = this.database
       .prepare('SELECT result_json FROM model_probe_cache WHERE cache_key = ?')
       .get(cacheKey) as { result_json: string } | undefined;

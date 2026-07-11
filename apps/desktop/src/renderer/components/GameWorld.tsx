@@ -4,6 +4,7 @@ import {
   type ActorId,
   type AppSettings,
   type BranchId,
+  type Commitment,
   type Conversation,
   type GameAction,
   type GameView,
@@ -261,6 +262,34 @@ export function GameWorld({
       setConversationId(conversation.id);
       setChatText('');
       await reload();
+    } catch (caught) {
+      setError(errorMessage(caught));
+    } finally {
+      setBusy('');
+    }
+  };
+
+  const respondToCommitment = async (
+    commitmentId: Commitment['id'],
+    response: 'accepted' | 'rejected' | 'pending',
+  ): Promise<void> => {
+    setBusy(
+      `${response === 'pending' ? 'Deferring' : response === 'accepted' ? 'Accepting' : 'Rejecting'} commitment…`,
+    );
+    setError('');
+    try {
+      await window.paxLocalia.chats.respondCommitment(
+        game.summary.id,
+        game.summary.branchId,
+        commitmentId,
+        response,
+      );
+      await reload();
+      setNotice(
+        response === 'pending'
+          ? 'Commitment left pending for later review.'
+          : `Commitment ${response}. It will influence later simulation.`,
+      );
     } catch (caught) {
       setError(errorMessage(caught));
     } finally {
@@ -562,6 +591,23 @@ export function GameWorld({
                       <small>
                         Turn {branch.turnCount} · branch point {branch.branchPointTurn}
                       </small>
+                      {branch.id !== game.summary.branchId && (
+                        <button
+                          type="button"
+                          className="button subtle"
+                          onClick={() =>
+                            void window.paxLocalia.timeline
+                              .switchBranch(game.summary.id, branch.id)
+                              .then((switched) => {
+                                onGame(switched);
+                                setNotice(`Switched to ${branch.label}.`);
+                              })
+                              .catch((caught) => setError(errorMessage(caught)))
+                          }
+                        >
+                          Switch to branch
+                        </button>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -1022,6 +1068,28 @@ export function GameWorld({
                           <span>{commitment.kind}</span>
                           <strong>{commitment.summary}</strong>
                           <small>{commitment.status}</small>
+                          {commitment.status === 'pending' && (
+                            <div className="commitment-actions">
+                              <button
+                                type="button"
+                                onClick={() => void respondToCommitment(commitment.id, 'accepted')}
+                              >
+                                Accept
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => void respondToCommitment(commitment.id, 'rejected')}
+                              >
+                                Reject
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => void respondToCommitment(commitment.id, 'pending')}
+                              >
+                                Defer
+                              </button>
+                            </div>
+                          )}
                         </div>
                       ) : null;
                     })}

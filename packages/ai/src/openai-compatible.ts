@@ -68,14 +68,14 @@ export class OpenAICompatibleProvider implements LocalAIProvider {
     );
   }
 
-  async capabilities(): Promise<ProviderCapabilities> {
-    return {
+  capabilities(): Promise<ProviderCapabilities> {
+    return Promise.resolve({
       nativeModelApi: false,
       structuredOutput: true,
       streaming: true,
       modelLifecycle: false,
       tokenCounting: false,
-    };
+    });
   }
 
   async listModels(signal?: AbortSignal): Promise<LocalModelInfo[]> {

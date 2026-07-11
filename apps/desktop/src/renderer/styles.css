@@ -1366,6 +1366,60 @@ button {
   inset: 0;
 }
 
+.map-fallback {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(55, 84, 98, 0.24), transparent 55%), #18232d;
+}
+
+.map-fallback svg {
+  width: 100%;
+  height: 100%;
+}
+
+.map-fallback polygon {
+  stroke: #111820;
+  stroke-width: 2;
+  opacity: 0.86;
+  cursor: pointer;
+}
+
+.map-fallback polygon:hover,
+.map-fallback polygon:focus {
+  stroke: var(--ivory);
+  stroke-width: 4;
+  outline: none;
+}
+
+.map-fallback polygon.contested {
+  stroke: var(--red);
+  stroke-width: 4;
+  stroke-dasharray: 9 6;
+}
+
+.map-fallback polygon.selected {
+  stroke: var(--warm-bright);
+  stroke-width: 6;
+}
+
+.fallback-map-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.map-fallback-notice {
+  position: absolute;
+  right: 0.7rem;
+  top: 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.3rem 0.5rem;
+  background: rgba(12, 18, 23, 0.85);
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
 .map-canvas::after {
   position: absolute;
   right: 50%;
@@ -1799,6 +1853,23 @@ button {
   padding: 0.4rem;
   color: #d8bd83;
   font-size: 0.66rem;
+}
+
+.commitment-actions {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: 0.35rem;
+}
+
+.commitment-actions button {
+  border: 1px solid #75613d;
+  border-radius: 3px;
+  padding: 0.2rem 0.45rem;
+  color: #e6cc93;
+}
+
+.commitment-actions button:hover {
+  background: rgba(209, 168, 92, 0.16);
 }
 
 .chat-composer {
@@ -2303,7 +2374,7 @@ button {
     z-index: 20;
     top: 3.8rem;
     right: 0;
-    bottom: minmax(13rem, 28vh);
+    bottom: 28vh;
     width: min(360px, 40vw);
     box-shadow: -10px 0 35px rgba(0, 0, 0, 0.4);
   }
