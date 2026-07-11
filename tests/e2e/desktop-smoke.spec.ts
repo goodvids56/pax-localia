@@ -1,4 +1,4 @@
-import { mkdirSync, mkdtempSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, rmSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { _electron as electron, expect, test, type ElectronApplication } from '@playwright/test';
@@ -6,19 +6,20 @@ import { _electron as electron, expect, test, type ElectronApplication } from '@
 const temporaryDirectories: string[] = [];
 
 function developmentElectronExecutable(): string {
-  const distribution = path.join(
-    process.cwd(),
-    'apps',
-    'desktop',
-    'node_modules',
-    'electron',
-    'dist',
-  );
-  if (process.platform === 'win32') return path.join(distribution, 'electron.exe');
-  if (process.platform === 'darwin') {
-    return path.join(distribution, 'Electron.app', 'Contents', 'MacOS', 'Electron');
+  const distributions = [
+    path.join(process.cwd(), 'node_modules', 'electron', 'dist'),
+    path.join(process.cwd(), 'apps', 'desktop', 'node_modules', 'electron', 'dist'),
+  ];
+  for (const distribution of distributions) {
+    const executable =
+      process.platform === 'win32'
+        ? path.join(distribution, 'electron.exe')
+        : process.platform === 'darwin'
+          ? path.join(distribution, 'Electron.app', 'Contents', 'MacOS', 'Electron')
+          : path.join(distribution, 'electron');
+    if (existsSync(executable)) return executable;
   }
-  return path.join(distribution, 'electron');
+  throw new Error('The development Electron executable was not installed.');
 }
 
 async function launch(dataDirectory: string): Promise<ElectronApplication> {
