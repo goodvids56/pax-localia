@@ -1,0 +1,41 @@
+PAX LOCALIA THIRD-PARTY NOTICES
+
+Application license
+Pax Localia source code: GNU General Public License v3.0 or later.
+The complete license is distributed as LICENSE.
+
+Runtime dependencies
+Electron — MIT License
+React and React DOM — MIT License
+Zustand — MIT License
+Zod — MIT License
+better-sqlite3 — MIT License
+MapLibre GL JS — BSD 3-Clause License
+Pino — MIT License
+date-fns — MIT License
+fflate — MIT License
+
+Build, packaging, and test dependencies
+Electron Forge and official makers/plugins — MIT License
+Vite and @vitejs/plugin-react — MIT License
+TypeScript — Apache License 2.0
+ESLint and TypeScript ESLint — MIT License
+Prettier — MIT License
+Vitest — MIT License
+Playwright — Apache License 2.0
+pnpm — MIT License
+
+Datasets and scenario sources
+Bundled schematic atomic-region geometry — original Pax Localia contributor
+work dedicated under CC0-1.0.
+
+The Uneasy Peace of 421 BCE scenario uses broad factual context from
+Thucydides, History of the Peloponnesian War, Book V. Ancient text and cited
+public-domain translations are public domain. The scenario synthesis,
+selection, and wording are original and licensed CC-BY-SA-4.0.
+
+The Selene Border Crisis and Signals Across Orpheus Reach settings, names,
+text, and scenario data are original and licensed CC-BY-SA-4.0.
+
+Full dependency versions are pinned in pnpm-lock.yaml. Packaged releases also
+include the generated assets/licenses/THIRD_PARTY_NOTICES.txt inventory.

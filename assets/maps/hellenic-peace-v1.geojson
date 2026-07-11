@@ -1,0 +1,185 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "region:attica",
+      "properties": {
+        "regionId": "region:attica",
+        "name": "Attica"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [20, 40],
+            [22.2, 40.28],
+            [22.2, 42.28],
+            [20, 42],
+            [20, 40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:boeotia",
+      "properties": {
+        "regionId": "region:boeotia",
+        "name": "Boeotia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [22.2, 40],
+            [24.4, 39.72],
+            [24.4, 41.72],
+            [22.2, 42],
+            [22.2, 40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:euboea",
+      "properties": {
+        "regionId": "region:euboea",
+        "name": "Euboea"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [24.4, 40],
+            [26.599999999999998, 40.28],
+            [26.599999999999998, 42.28],
+            [24.4, 42],
+            [24.4, 40]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:argolid",
+      "properties": {
+        "regionId": "region:argolid",
+        "name": "Argolid"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [20, 38],
+            [22.2, 37.72],
+            [22.2, 39.72],
+            [20, 40],
+            [20, 38]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:corinthia",
+      "properties": {
+        "regionId": "region:corinthia",
+        "name": "Corinthia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [22.2, 38],
+            [24.4, 38.28],
+            [24.4, 40.28],
+            [22.2, 40],
+            [22.2, 38]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:arcadia",
+      "properties": {
+        "regionId": "region:arcadia",
+        "name": "Arcadia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [24.4, 38],
+            [26.599999999999998, 37.72],
+            [26.599999999999998, 39.72],
+            [24.4, 40],
+            [24.4, 38]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:laconia",
+      "properties": {
+        "regionId": "region:laconia",
+        "name": "Laconia"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [20, 36],
+            [22.2, 36.28],
+            [22.2, 38.28],
+            [20, 38],
+            [20, 36]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:messene",
+      "properties": {
+        "regionId": "region:messene",
+        "name": "Messene"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [22.2, 36],
+            [24.4, 35.72],
+            [24.4, 37.72],
+            [22.2, 38],
+            [22.2, 36]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "region:mantinea",
+      "properties": {
+        "regionId": "region:mantinea",
+        "name": "Mantinea"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [24.4, 36],
+            [26.599999999999998, 36.28],
+            [26.599999999999998, 38.28],
+            [24.4, 38],
+            [24.4, 36]
+          ]
+        ]
+      }
+    }
+  ]
+}
