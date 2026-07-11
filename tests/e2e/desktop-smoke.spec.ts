@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, mkdtempSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { _electron as electron, expect, test, type ElectronApplication } from '@playwright/test';
@@ -6,9 +6,16 @@ import { _electron as electron, expect, test, type ElectronApplication } from '@
 const temporaryDirectories: string[] = [];
 
 function developmentElectronExecutable(): string {
+  const pnpmStore = path.join(process.cwd(), 'node_modules', '.pnpm');
+  const pnpmDistributions = existsSync(pnpmStore)
+    ? readdirSync(pnpmStore)
+        .filter((entry) => entry.startsWith('electron@'))
+        .map((entry) => path.join(pnpmStore, entry, 'node_modules', 'electron', 'dist'))
+    : [];
   const distributions = [
     path.join(process.cwd(), 'node_modules', 'electron', 'dist'),
     path.join(process.cwd(), 'apps', 'desktop', 'node_modules', 'electron', 'dist'),
+    ...pnpmDistributions,
   ];
   for (const distribution of distributions) {
     const executable =
