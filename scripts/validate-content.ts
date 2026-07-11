@@ -154,7 +154,7 @@ for (const match of workflowSource.matchAll(/uses:\s+[^@\s]+@([^\s#]+)/g)) {
 for (const required of [
   'permissions:\n  contents: read',
   'fail-fast: false',
-  'windows-latest',
+  'windows-2022',
   'ubuntu-24.04',
   'macos-15',
   'pnpm install --frozen-lockfile',

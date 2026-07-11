@@ -25,6 +25,7 @@ Build and verification:
 - png2icons (MIT)
 - lodash (MIT)
 - macos-alias (MIT)
+- fs-xattr (MIT)
 
 Dataset and scenario notices are in DATASETS.md. Dependency package license
 files are retained in the source dependency tree and packaged application

@@ -27,6 +27,7 @@ pnpm — MIT License
 png2icons — MIT License
 lodash — MIT License
 macos-alias — MIT License
+fs-xattr — MIT License
 
 Datasets and scenario sources
 Bundled schematic atomic-region geometry — original Pax Localia contributor
