@@ -25,6 +25,8 @@ Vitest — MIT License
 Playwright — Apache License 2.0
 pnpm — MIT License
 png2icons — MIT License
+lodash — MIT License
+macos-alias — MIT License
 
 Datasets and scenario sources
 Bundled schematic atomic-region geometry — original Pax Localia contributor

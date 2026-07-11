@@ -7,3 +7,4 @@ onlyBuiltDependencies:
   - electron
   - electron-winstaller
   - esbuild
+  - macos-alias
